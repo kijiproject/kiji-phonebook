@@ -62,7 +62,7 @@ public class DeleteEntry extends Configured implements Tool {
     // We need first and last name to uniquely identify contacts.
     if (first.isEmpty() || last.isEmpty()) {
       System.out.println("First, Last name cannot be empty");
-      ResourceUtils.closeOrLog(console);
+      ResourceUtils.closeIfNotNull(console);
       return 1;
     }
 
@@ -90,10 +90,10 @@ public class DeleteEntry extends Configured implements Tool {
       return 1;
     } finally {
       // Safely free up resources by closing in reverse order.
-      ResourceUtils.closeOrLog(writer);
-      ResourceUtils.releaseOrLog(table);
-      ResourceUtils.releaseOrLog(kiji);
-      ResourceUtils.closeOrLog(console);
+      ResourceUtils.closeIfNotNull(writer);
+      ResourceUtils.releaseIfNotNull(table);
+      ResourceUtils.releaseIfNotNull(kiji);
+      ResourceUtils.closeIfNotNull(console);
     }
 
     return 0;

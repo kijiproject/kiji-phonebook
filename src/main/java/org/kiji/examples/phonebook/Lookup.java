@@ -119,9 +119,9 @@ public class Lookup extends Configured implements Tool {
       return 1;
     } finally {
       // Safely free up resources by closing in reverse order.
-      ResourceUtils.closeOrLog(reader);
-      ResourceUtils.releaseOrLog(table);
-      ResourceUtils.releaseOrLog(kiji);
+      ResourceUtils.closeIfNotNull(reader);
+      ResourceUtils.releaseIfNotNull(table);
+      ResourceUtils.releaseIfNotNull(kiji);
     }
 
     return 0;

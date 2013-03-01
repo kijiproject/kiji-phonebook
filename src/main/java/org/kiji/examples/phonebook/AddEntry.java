@@ -111,10 +111,10 @@ public class AddEntry extends Configured implements Tool {
       return 1;
     } finally {
       // Safely free up resources by closing in reverse order.
-      ResourceUtils.closeOrLog(writer);
-      ResourceUtils.releaseOrLog(table);
-      ResourceUtils.releaseOrLog(kiji);
-      ResourceUtils.closeOrLog(console);
+      ResourceUtils.closeIfNotNull(writer);
+      ResourceUtils.releaseIfNotNull(table);
+      ResourceUtils.releaseIfNotNull(kiji);
+      ResourceUtils.closeIfNotNull(console);
     }
 
     return 0;

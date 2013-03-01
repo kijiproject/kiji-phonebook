@@ -107,8 +107,8 @@ public class IntegrationTestPhonebookImporter
 
   @After
   public void tearDown() throws Exception {
-    ResourceUtils.releaseOrLog(mOutputTable);
-    ResourceUtils.releaseOrLog(mKiji);
+    ResourceUtils.releaseIfNotNull(mOutputTable);
+    ResourceUtils.releaseIfNotNull(mKiji);
     mFS.delete(mInputPath, false);
 
     mOutputTable = null;
