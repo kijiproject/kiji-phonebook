@@ -128,9 +128,9 @@ public class IncrementTalkTime extends Configured implements Tool {
     @Override
     protected void cleanup(Context hadoopContext) throws IOException, InterruptedException {
       // Safely free up resources by closing in reverse order.
-      ResourceUtils.closeOrLog(mWriter);
-      ResourceUtils.releaseOrLog(mTable);
-      ResourceUtils.releaseOrLog(mKiji);
+      ResourceUtils.closeIfNotNull(mWriter);
+      ResourceUtils.releaseIfNotNull(mTable);
+      ResourceUtils.releaseIfNotNull(mKiji);
       super.cleanup(hadoopContext);
     }
   }

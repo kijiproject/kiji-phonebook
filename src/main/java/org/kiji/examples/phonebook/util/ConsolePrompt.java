@@ -67,7 +67,7 @@ public final class ConsolePrompt implements Closeable {
    * Close all underlying resources.
    */
   @Override
-  public void close() {
-    ResourceUtils.closeOrLog(mConsoleReader);
+  public void close() throws IOException {
+    ResourceUtils.closeIfNotNull(mConsoleReader);
   }
 }

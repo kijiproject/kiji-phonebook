@@ -103,10 +103,10 @@ public class StandalonePhonebookImporter extends Configured implements Tool {
       System.out.println("Error importing records: " + e);
       return 1;
     } finally {
-      ResourceUtils.closeOrLog(reader);
-      ResourceUtils.closeOrLog(writer);
-      ResourceUtils.releaseOrLog(table);
-      ResourceUtils.releaseOrLog(kiji);
+      ResourceUtils.closeIfNotNull(reader);
+      ResourceUtils.closeIfNotNull(writer);
+      ResourceUtils.releaseIfNotNull(table);
+      ResourceUtils.releaseIfNotNull(kiji);
     }
     return 0;
   }

@@ -141,9 +141,9 @@ public class AddressFieldExtractor extends Configured implements Tool {
     /** {@inheritDoc} */
     @Override
     protected void cleanup(Context hadoopContext) throws IOException, InterruptedException {
-      ResourceUtils.closeOrLog(mTableWriter);
-      ResourceUtils.releaseOrLog(mTable);
-      ResourceUtils.releaseOrLog(mKiji);
+      ResourceUtils.closeIfNotNull(mTableWriter);
+      ResourceUtils.releaseIfNotNull(mTable);
+      ResourceUtils.releaseIfNotNull(mKiji);
       super.cleanup(hadoopContext);
     }
   }
