@@ -29,7 +29,7 @@
   <parent>
     <groupId>org.kiji.pom</groupId>
     <artifactId>root-pom</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT</version>
   </parent>
 
   <name>Kiji Phonebook Example</name>
@@ -37,11 +37,12 @@
   <url>http://www.kiji.org</url>
 
   <properties>
-    <kiji-schema.version>1.5.0</kiji-schema.version>
-    <kiji-schema-shell.version>1.3.8</kiji-schema-shell.version>
-    <kiji-cdh4-platform.version>1.3.0</kiji-cdh4-platform.version>
-    <kiji-mapreduce.version>1.2.9</kiji-mapreduce.version>
-    <fake-hbase.version>0.1.5</fake-hbase.version>
+    <kiji-schema.version>1.6.0-SNAPSHOT</kiji-schema.version>
+    <kiji-schema-shell.version>1.4.0-SNAPSHOT</kiji-schema-shell.version>
+    <kiji-cdh4-platform.version>1.4.0-SNAPSHOT</kiji-cdh4-platform.version>
+    <kiji-mapreduce.version>1.3.0-SNAPSHOT</kiji-mapreduce.version>
+    <kiji-common-flags.version>1.1.1-SNAPSHOT</kiji-common-flags.version>
+    <fake-hbase.version>0.2.0-SNAPSHOT</fake-hbase.version>
   </properties>
 
   <build>
@@ -59,26 +60,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.kiji.maven.plugins</groupId>
-        <artifactId>hbase-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <additionalClasspathElements>
-            <additionalClasspathElement>
-              ${project.build.directory}/${project.artifactId}-${project.version}.jar
-            </additionalClasspathElement>
-            <additionalClasspathElement>
-              ${project.build.directory}/${project.artifactId}-${project.version}-tests.jar
-            </additionalClasspathElement>
-          </additionalClasspathElements>
-        </configuration>
       </plugin>
 
       <plugin>
@@ -113,8 +94,20 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.kiji.common</groupId>
+      <artifactId>kiji-common-flags</artifactId>
+      <version>${kiji-common-flags.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.kiji.schema</groupId>
       <artifactId>kiji-schema</artifactId>
+      <version>${kiji-schema.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kiji.schema</groupId>
+      <artifactId>kiji-schema-cassandra</artifactId>
       <version>${kiji-schema.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -128,6 +121,12 @@
     <dependency>
       <groupId>org.kiji.mapreduce</groupId>
       <artifactId>kiji-mapreduce</artifactId>
+      <version>${kiji-mapreduce.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kiji.mapreduce</groupId>
+      <artifactId>kiji-mapreduce-cassandra</artifactId>
       <version>${kiji-mapreduce.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -153,12 +152,6 @@
       <artifactId>fake-hbase</artifactId>
       <version>${fake-hbase.version}</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.hbase</groupId>
-      <artifactId>hbase</artifactId>
-      <scope>test</scope>
-      <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>
